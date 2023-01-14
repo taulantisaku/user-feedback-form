@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, cleanup, screen } from '@testing-library/react';
 import FeedbackForm from "../FeedbackForm";
 
 test('form submits with correct data', async () => {
