@@ -9,6 +9,18 @@ type Inputs = {
   comments?: string;
 };
 
+const DownloadJSON = (Data: Inputs, fileName: string) => {
+  const dataStr =
+    "data:application/json;charset=utf-8," +
+    encodeURIComponent(JSON.stringify(Data));
+  const download = document.createElement("a");
+  download.setAttribute("href", dataStr);
+  download.setAttribute("download", `${fileName}.json`);
+  document.body.appendChild(download);
+  download.click();
+  download.remove();
+};
+
 function FeedbackForm() {
   const {
     register,
@@ -16,10 +28,14 @@ function FeedbackForm() {
     watch,
     formState: { errors },
   } = useForm<Inputs>({ resolver: yupResolver(userSchema) });
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    console.log(data);
+    DownloadJSON(data, "feedback-form-data");
+  };
 
   console.log(watch("name"));
   return (
+    
     <form onSubmit={handleSubmit(onSubmit)}>
       <input placeholder="Name" {...register("name", { required: true })} />
       <p>{errors.name?.message}</p>
