@@ -6,14 +6,14 @@ module.exports = {
     "!src/mocks/**",
   ],
   coveragePathIgnorePatterns: [],
-  setupFilesAfterEnv: ["./config/jest/setupTests.js"],
+  setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
   testEnvironment: "jsdom",
   modulePaths: ["<rootDir>/src"],
   transform: {
     "^.+\\.(ts|js|tsx|jsx)$": "@swc/jest",
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+    "^.+\\.css$": "<rootDir>/cssTransform.js",
     "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
-      "<rootDir>/config/jest/fileTransform.js",
+      "<rootDir>/fileTransform.js",
   },
   transformIgnorePatterns: [
     "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",
@@ -43,4 +43,5 @@ module.exports = {
     "jest-watch-typeahead/testname",
   ],
   resetMocks: true,
+  testEnvironment: "jest-environment-jsdom",
 };
